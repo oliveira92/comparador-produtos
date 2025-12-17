@@ -62,7 +62,17 @@ class ConsultarProdutosServiceTest {
     }
 
     private ProdutoDomain criarProduto(Long id) {
-        return new ProdutoDomain(id, "Produto", "url", "descricao", BigDecimal.TEN, BigDecimal.ONE,
-                List.of(new EspecificacaoDomain("Chave", "Valor")));
+        return ProdutoDomain.builder()
+                .id(id)
+                .nome("Produto")
+                .urlImagem("url")
+                .descricao("descricao")
+                .preco(BigDecimal.TEN)
+                .classificacao(BigDecimal.ONE)
+                .especificacoes(List.of(EspecificacaoDomain.builder()
+                        .nome("Chave")
+                        .valor("Valor")
+                        .build()))
+                .build();
     }
 }

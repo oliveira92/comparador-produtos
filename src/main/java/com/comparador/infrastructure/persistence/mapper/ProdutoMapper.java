@@ -16,17 +16,20 @@ public class ProdutoMapper {
     public static ProdutoDomain mapearParaDomain(ProdutoEntity entity) {
         List<EspecificacaoDomain> especificacoes = entity.getEspecificacoes()
                 .stream()
-                .map(e -> new EspecificacaoDomain(e.getNome(), e.getValor()))
+                .map(e -> EspecificacaoDomain.builder()
+                        .nome(e.getNome())
+                        .valor(e.getValor())
+                        .build())
                 .collect(Collectors.toList());
-        return new ProdutoDomain(
-                entity.getId(),
-                entity.getNome(),
-                entity.getUrlImagem(),
-                entity.getDescricao(),
-                entity.getPreco(),
-                entity.getClassificacao(),
-                especificacoes
-        );
+        return ProdutoDomain.builder()
+                .id(entity.getId())
+                .nome(entity.getNome())
+                .urlImagem(entity.getUrlImagem())
+                .descricao(entity.getDescricao())
+                .preco(entity.getPreco())
+                .classificacao(entity.getClassificacao())
+                .especificacoes(especificacoes)
+                .build();
     }
 
     public static ProdutoEntity mapearParaEntity(ProdutoDomain domain) {

@@ -49,17 +49,20 @@ public class ProdutoController {
     private ProdutoResponse mapearResposta(ProdutoDomain domain) {
         List<EspecificacaoResponse> especificacoes = domain.getEspecificacoes()
                 .stream()
-                .map(e -> new EspecificacaoResponse(e.getNome(), e.getValor()))
+                .map(e -> EspecificacaoResponse.builder()
+                        .nome(e.getNome())
+                        .valor(e.getValor())
+                        .build())
                 .collect(Collectors.toList());
 
-        return new ProdutoResponse(
-                domain.getId(),
-                domain.getNome(),
-                domain.getUrlImagem(),
-                domain.getDescricao(),
-                domain.getPreco(),
-                domain.getClassificacao(),
-                especificacoes
-        );
+        return ProdutoResponse.builder()
+                .id(domain.getId())
+                .nome(domain.getNome())
+                .urlImagem(domain.getUrlImagem())
+                .descricao(domain.getDescricao())
+                .preco(domain.getPreco())
+                .classificacao(domain.getClassificacao())
+                .especificacoes(especificacoes)
+                .build();
     }
 }
