@@ -1,18 +1,14 @@
 package com.comparador.domain.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
-@Builder
 @AllArgsConstructor
-@NoArgsConstructor(force = true)
 @EqualsAndHashCode(of = "id")
 public class ProdutoDomain {
 
